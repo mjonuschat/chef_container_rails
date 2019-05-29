@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+. /etc/container_environment.sh
+cd /home/app
+exec /sbin/setuser app bin/sidekiq -c 25 -q default -q mailers
