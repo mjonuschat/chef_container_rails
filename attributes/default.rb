@@ -33,7 +33,4 @@ default['container_rails']['app']['env'] = %w[
   REDIS_URL
 ]
 
-default['container_rails']['sentry']['version'] = '1.44.1'
-default['container_rails']['sentry']['checksum'] = '3bd30387f0fa284dca6521723c583748b28bed6fa6ddcf702208858770484804'
-
 default['container_rails']['filebeat']['version'] = '6.x'

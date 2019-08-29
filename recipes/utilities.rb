@@ -34,8 +34,7 @@ runit_service 'filebeat' do
 end
 
 remote_file '/usr/local/bin/sentry-cli' do
-  source "https://github.com/getsentry/sentry-cli/releases/download/#{node['container_rails']['sentry']['version']}/sentry-cli-Linux-x86_64"
-  checksum node['container_rails']['sentry']['checksum']
+  source "https://github.com/getsentry/sentry-cli/releases/latest/download/sentry-cli-Linux-x86_64"
   owner 'root'
   group 'root'
   mode '0755'
