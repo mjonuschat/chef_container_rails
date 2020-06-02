@@ -33,4 +33,4 @@ default['container_rails']['app']['env'] = %w[
   REDIS_URL
 ]
 
-default['container_rails']['filebeat']['version'] = '6.x'
+default['container_rails']['filebeat']['version'] = 'oss-7.x'
