@@ -1,5 +1,14 @@
-#=========================== Filebeat prospectors =============================
-filebeat.prospectors:
+#=========================== Filebeat setup =============================
+name: ${FILEBEAT_APP_NAME:app}
+setup.template:
+  name: "${FILEBEAT_APP_NAME:app}"
+  pattern: "${FILEBEAT_APP_NAME:app}-*"
+
+setup.dashboards.index: "${FILEBEAT_APP_NAME:app}-*"
+setup.dashboards.enabled: false
+
+#=========================== Filebeat inputs =============================
+filebeat.inputs:
 - type: log
   encoding: utf-8
   paths:
@@ -7,19 +16,16 @@ filebeat.prospectors:
   json.keys_under_root: true
   json.add_error_key: true
 
+#=========================== Filebeat processors =============================
+processors:
+  - rename:
+      fields:
+        - from: "source"
+          to: "origin"
+      ignore_missing: true
+      fail_on_error: false
+
 #================================ Outputs =====================================
-
-name: ${FILEBEAT_APP_NAME:app}
-
-#-------------------------- Elasticsearch output ------------------------------
 output.elasticsearch:
-  # Array of hosts to connect to.
-  hosts: ["${FILEBEAT_ELASTICSEARCH_HOSTS:localhost:9200}"]
+  hosts: ["${FILEBEAT_ELASTICSEARCH_HOSTS:http://localhost:9200}"]
   index: "${FILEBEAT_APP_NAME:app}-%{+yyyy.MM}"
-
-setup.template:
-  name: "${FILEBEAT_APP_NAME:app}"
-  pattern: "${FILEBEAT_APP_NAME:app}-*"
-
-setup.dashboards.index: "${FILEBEAT_APP_NAME:app}-*"
-setup.dashboards.enabled: false
