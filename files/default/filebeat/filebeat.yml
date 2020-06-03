@@ -7,6 +7,8 @@ setup.template:
 setup.dashboards.index: "${FILEBEAT_APP_NAME:app}-*"
 setup.dashboards.enabled: false
 
+setup.ilm.enabled: false
+
 #=========================== Filebeat inputs =============================
 filebeat.inputs:
 - type: log
